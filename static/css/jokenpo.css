@@ -1,137 +1,62 @@
-/* Importa a fonte Inter do Google Fonts (se já não estiver no style.css principal) */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-
-/* Container principal do seu componente Jokenpo */
-.jokenpo-app-container {
-    display: flex;
-    flex-direction: column;
-    gap: 30px; /* Espaço entre as seções para um espaçador mais visível */
-    width: 100%;
-    max-width: 1400px; /* Largura máxima para ocupar mais espaço */
-    padding: 15px; /* Padding interno para o container principal */
-    box-sizing: border-box; 
-    margin: 20px auto; /* Centraliza e adiciona margem */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
 }
 
-/* Seções principais do layout */
-.top-info-controls-row,
-.camera-robot-row,
-.bottom-messages-debug-row {
-    display: flex;
-    flex-wrap: wrap; /* Permite quebrar linha em telas pequenas */
-    gap: 20px; /* Espaço entre os cards dentro de cada linha */
-    justify-content: center;
-    width: 100%;
-}
-
-/* Estilos gerais para os cards */
-.card {
-    background-color: #ffffff; /* Fundo branco para os cards, que contrasta bem com azul */
-    border-radius: 12px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Sombra mais suave */
-    padding: 20px; /* Padding interno reduzido para um look mais compacto */
-    flex: 1; 
-    min-width: 300px; /* Largura mínima ajustada */
-    max-width: 680px; /* Ajustado para caber bem em duas colunas dentro do novo max-width do container */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    transition: transform 0.3s ease-in-out;
-    box-sizing: border-box;
-    border: 1px solid #a7d9eb; /* Borda sutil com tom de azul claro */
-}
-
-.card:hover {
-    transform: translateY(-3px); /* Efeito de levantar mais sutil */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-}
-
-h2 {
-    color: #26c6da; /* Ciano mais brilhante para títulos */
-    margin-top: 0;
-    font-weight: 600;
-    font-size: 1.6rem; /* Tamanho de título ligeiramente menor */
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 15px; /* Espaço abaixo do título do card */
-}
-
-/* --- Seção de Placar e Controles (Topo) --- */
-.game-scoreboard-controls {
-    max-width: 1000px; /* Permite o card de cima ser mais largo */
-    padding-bottom: 15px; /* Reduz padding bottom */
-}
-
-.scoreboard-and-info-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 15px; /* Espaço antes dos botões */
-}
-
-.scoreboard {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px; /* Espaçamento reduzido no placar */
-    margin: 10px 0; /* Margem reduzida */
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #2c3e50;
-    background-color: #e3f2fd; /* Azul muito claro */
-    padding: 12px 25px; /* Padding reduzido */
-    border-radius: 8px; /* Cantos mais arredondados */
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.08);
-    width: auto; /* Deixa o placar ajustar sua largura ao conteúdo */
-    box-sizing: border-box;
-}
-
-.score { text-align: center; }
-.score span { color: #26c6da; font-size: 2.8rem; } /* Tamanho da pontuação ligeiramente menor */
-.separator { font-size: 2.8rem; color: #b0bec5; }
-
-.round-info {
-    margin-top: 5px; /* Ajusta espaçamento */
-    font-size: 1rem; /* Tamanho de fonte normal */
-    font-weight: 500;
-    width: 100%;
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
     text-align: center;
 }
-.round-info span { color: #26c6da; font-weight: 700; }
 
-.jokenpo-controls {
+main {
     display: flex;
-    gap: 10px; /* Espaço reduzido entre botões */
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    width: 100%;
-    margin-top: 10px;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-/* --- Seção de Câmeras (Meio) --- */
-.camera-section .video-container {
-    width: 100%;
-    max-width: 560px; /* Ajusta a largura máxima para a câmera */
-    aspect-ratio: 4 / 3; /* Proporção de 4:3 é mais comum para webcams */
-    border: 2px solid #a7d9eb;
-    background-color: #000;
-    border-radius: 8px;
-    overflow: hidden;
-    margin-bottom: 15px;
-    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.2);
+.card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: calc(50% - 20px);
+}
+
+.camera-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.video-container {
     position: relative;
+    width: 100%;
+    height: 400px;
+    padding-bottom: 0;
 }
 
-#camera-feed { /* Renomeado de #videoStream */
+#camera-feed {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Garante que a imagem inteira seja visível */
-    display: block;
-    transform: scaleX(-1);
-    z-index: 1;
+    object-fit: cover;
 }
 
 .status-message {
@@ -139,228 +64,113 @@ h2 {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: white;
-    background-color: rgba(0, 0, 0, 0.6);
-    padding: 6px 12px; /* Padding reduzido */
-    border-radius: 5px;
-    font-size: 0.8rem; /* Fonte menor */
-    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
 }
 
-.player-info-live {
-    margin-top: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.game-feedback-area {
+    margin-top: 20px;
 }
 
-.player-info-live p {
-    margin: 0 0 8px 0;
-    font-weight: 600;
-    color: #334e68;
-    font-size: 0.95rem; /* Fonte ligeiramente menor */
-}
-
-.player-info-live .gesture-icon {
-    font-size: 3.5rem; /* Tamanho de ícone ligeiramente menor */
-    color: #26c6da;
-}
-
-/* --- Seção da Mão Robótica (Meio) --- */
-.robot-section .robot-hand-display {
-    width: 100%;
-    max-width: 560px; /* Consistente com a câmera do jogador */
-    height: 200px; /* Altura ajustada para ser mais compacta */
-    background-color: #e3f2fd;
-    border: 2px solid #a7d9eb;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px; /* Espaço reduzido */
-    margin-bottom: 15px;
-    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.1);
-}
-
-.robot-section .robot-status {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #4db6ac;
-    margin: 0;
-}
-
-.robot-section .gesture-icon {
-    font-size: 5.5rem; /* Tamanho de ícone ligeiramente menor */
-    color: #26c6da;
-}
-
-.ai-game-feedback {
-    margin-top: 10px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-}
-
-.ai-game-feedback .countdown-ai {
-    font-size: 1.6rem; /* Fonte reduzida */
-    font-weight: 700;
-    color: #ff9800;
-    margin: 0;
-}
-
-.ai-game-feedback .result-ai {
-    font-size: 1.3rem; /* Fonte reduzida */
-    font-weight: 600;
-    color: #2c3e50;
-    margin: 0;
-}
-.ai-game-feedback .result-ai.won { color: #4caf50; }
-.ai-game-feedback .result-ai.lost { color: #f44336; }
-.ai-game-feedback .result-ai.draw { color: #ffeb3b; }
-
-
-/* --- Botões Gerais --- */
-.button {
-    padding: 10px 20px; /* Padding reduzido */
-    border: none;
-    border-radius: 6px; /* Cantos mais suaves */
-    cursor: pointer;
-    font-size: 0.9rem; /* Fonte ligeiramente menor */
-    font-weight: 600;
-    transition: all 0.2s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-}
-
-.button:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-
-.button.primary { background-color: #26c6da; color: white; }
-.button.primary:hover { background-color: #00bcd4; }
-.button.danger { background-color: #ef5350; color: white; }
-.button.danger:hover { background-color: #e53935; }
-.button.success { background-color: #66bb6a; color: white; }
-.button.success:hover { background-color: #43a047; }
-.button.info { background-color: #90a4ae; color: white; }
-.button.info:hover { background-color: #78909c; }
-
-
-/* --- Seção de Mensagens Principais (Fundo) --- */
-.main-messages-section {
-    /* Herda de .card */
+.scoreboard-mini {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 10px;
 }
 
 .result-message-area {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px; /* Espaço reduzido */
+    margin-top: 10px;
 }
 
 #round-result-main {
-    font-size: 1.6rem; /* Fonte ligeiramente menor */
-    font-weight: 700;
-    color: #2c3e50;
-    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
 }
-#round-result-main.won { color: #4caf50; }
-#round-result-main.lost { color: #f44336; }
-#round-result-main.draw { color: #ffeb3b; }
 
-.countdown-display { margin: 0; }
+.countdown-display {
+    margin-top: 10px;
+}
+
 #countdown-message {
-    font-size: 2rem; /* Fonte ligeiramente menor */
-    font-weight: 700;
-    color: #ff9800;
-    transition: color 0.3s ease;
-    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
 }
 
-/* --- Seção de Debug (Fundo) --- */
-.debug-info-section {
-    text-align: left;
+.jokenpo-game-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.debug-content {
-    width: 100%;
+.scoreboard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
 }
 
-.debug-info-section h3 {
-    margin-top: 0;
-    color: #26c6da;
-    font-size: 1.1rem; /* Fonte ligeiramente menor */
-    margin-bottom: 8px;
-}
-.debug-info-section p { margin: 0 0 4px 0; font-weight: 600; font-size: 0.9rem; } /* Fonte menor */
-.debug-info-section span { font-weight: 400; color: #3f51b5; } /* Azul mais escuro */
-#jokenpo-json-display {
-    background-color: #e0f2f7;
-    border: 1px solid #b3e0ed;
-    border-radius: 8px;
-    padding: 8px; /* Padding reduzido */
-    margin-top: 5px;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.75rem; /* Fonte menor para JSON */
-    white-space: pre-wrap;
-    word-break: break-all;
-    max-height: 120px; /* Altura ajustada */
-    overflow-y: auto;
-    width: 100%;
-    text-align: left;
-    box-sizing: border-box;
+.score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-/* --- Media Queries para Responsividade --- */
-@media (max-width: 1200px) { /* Novo breakpoint para tablets maiores */
-    .jokenpo-app-container {
-        max-width: 95%; /* Ocupa a maior parte da largura em telas médias */
-    }
-    .card {
-        max-width: 48%; /* Permite 2 cards por linha */
-    }
-    .game-scoreboard-controls {
-        max-width: 70%; /* Ajusta para ser mais largo em telas médias */
-    }
+.separator {
+    font-size: 24px;
+    font-weight: bold;
 }
 
-@media (max-width: 900px) { /* Tablet Portrait e Mobile Landscape */
-    .game-scoreboard-controls,
-    .camera-robot-row,
-    .bottom-messages-debug-row {
-        flex-direction: column; /* Empilha as seções em colunas */
-        align-items: center;
-    }
-    .card {
-        min-width: 95%; /* Ocupa mais espaço em telas menores */
-        max-width: 95%; 
-        padding: 15px; /* Reduz padding em telas menores */
-    }
-    .game-scoreboard-controls {
-        max-width: 95%; /* Ajusta para ser mais largo em telas menores */
-    }
+.current-gestures {
+    margin-top: 20px;
 }
 
-@media (max-width: 500px) { /* Mobile muito pequeno */
-    h1 { font-size: 1.8rem; }
-    h2 { font-size: 1.4rem; }
-    .scoreboard { font-size: 1.4rem; gap: 8px; padding: 10px 15px; }
-    .score span { font-size: 2.2rem; }
-    .separator { font-size: 2.2rem; }
-    #round-result-main, .ai-game-feedback .result-ai { font-size: 1.2rem; }
-    #countdown-message, .ai-game-feedback .countdown-ai { font-size: 1.6rem; }
-    .button { padding: 8px 15px; font-size: 0.8rem; }
-    .player-info-live .gesture-icon { font-size: 2.8rem; }
-    .robot-section .robot-hand-display { height: 160px; }
-    .robot-section .gesture-icon { font-size: 4.5rem; }
-    .debug-info-section h3 { font-size: 0.9rem; }
-    .debug-info-section p { font-size: 0.75rem; }
-    #jokenpo-json-display { max-height: 80px; font-size: 0.65rem; padding: 6px; }
+.player-info, .ai-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.gesture-icon {
+    font-size: 48px;
+}
+
+.debug-info {
+    margin-top: 20px;
+}
+
+.button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.primary {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.danger {
+    background-color: #F44336;
+    color: #fff;
+}
+
+.success {
+    background-color: #8BC34A;
+    color: #fff;
+}
+
+.info {
+    background-color: #2196F3;
+    color: #fff;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    clear: both;
 }

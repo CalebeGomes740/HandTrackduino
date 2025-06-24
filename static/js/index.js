@@ -25,6 +25,13 @@ function loadContent(id) {
             document.getElementById('content').innerHTML = html;
         });
     }
+    else if (id === 3) {
+        fetch('/jokenpo')
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById('content').innerHTML = html;
+        });
+    }
     else {
         fetch(`/conteudo/${id}`)
         .then(response => response.json())

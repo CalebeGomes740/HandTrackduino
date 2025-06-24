@@ -1,112 +1,85 @@
-{% extends 'base.html' %}
-
-{% block title %}Jokenpo com IA{% endblock %} {# Define o título da aba do navegador para esta página #}
-{# Não há um bloco para 'header_title' no seu base.html, mas se fosse preciso, estaria aqui #}
-
-{% block content %}
-{# Aqui você pode adicionar um link para o CSS específico do Jokenpo, se não estiver já no seu style.css principal #}
-{# RECOMENDAÇÃO: Idealmente, este link estaria no <head> via um bloco no base.html. #}
-{# Para simplicidade e para não modificar seu base.html, colocamos aqui: #}
-
-
-<div class="jokenpo-app-container">
-    {# A estrutura de divs e sections que você forneceu para o Jokenpo #}
-
-    <!-- Linha Superior: Placar e Botões de Controle -->
-    <div class="top-info-controls-row">
-        <section class="game-scoreboard-controls card">
-            <h2><i class="fas fa-gamepad"></i> Jogo & Controles</h2>
-            <!-- Placar -->
-            <div class="scoreboard">
-                <div class="score">
-                    <span class="player-score" id="player-score">0</span>
-                    <p>Jogador</p>
-                </div>
-                <div class="separator">-</div>
-                <div class="score">
-                    <span class="ai-score" id="ai-score">0</span>
-                    <p>IA</p>
-                </div>
-            </div>
-            <div class="round-info">
-                <p>Empates: <span id="ties">0</span> | Rodadas: <span id="rounds-played">0</span></p>
-            </div>
-            
-            <!-- Botões de Controle do Jogo -->
-            <div class="jokenpo-controls">
-                <button id="start-processing" class="button primary"><i class="fas fa-play"></i> Iniciar Processamento</button>
-                <button id="stop-processing" class="button danger" style="display:none;"><i class="fas fa-stop"></i> Parar Processamento</button>
-                <button id="play-round-button" class="button success"><i class="fas fa-fist-raised"></i> Jogar Rodada</button>
-                <button id="finish-round-button" class="button info" style="display:none;"><i class="fas fa-undo"></i> Terminar Rodada</button>
-                <button id="reset-scoreboard" class="button info"><i class="fas fa-sync-alt"></i> Reiniciar Placar</button>
-            </div>
-        </section>
-    </div>
-
-    <!-- Linha do Meio: Câmera do Jogador e Mão Robótica da IA -->
-    <div class="camera-robot-row">
-        <!-- Camera Section (Jogador) -->
-        <section class="camera-section card">
-            <h2><i class="fas fa-video"></i> Sua Câmera</h2>
-            <div class="video-container">
-                <!-- O feed da câmera agora vem do endpoint do Flask -->
-                <img id="camera-feed" src="/video_feed" alt="Camera Feed">
-                <!-- O status da câmera será atualizado pelo JavaScript -->
-                <p id="camera-status" class="status-message">Conectando à câmera...</p>
-            </div>
-            <!-- Ícone do Gesto do Jogador (visualização em tempo real) -->
-            <div class="player-info-live">
-                <p>Seu Gesto (Ao Vivo):</p>
-                <div class="gesture-icon" id="player-live-gesture-icon">
-                    <i class="fas fa-question"></i>
-                </div>
-            </div>
-        </section>
-
-        <!-- Robô (Mão Robótica) Section (IA) -->
-        <section class="robot-section card">
-            <h2><i class="fas fa-robot"></i> Mão Robótica (IA)</h2>
-            <div class="robot-hand-display">
-                <p class="robot-status">Jogada da IA:</p>
-                <div class="gesture-icon" id="robot-choice-icon">
-                    <i class="fas fa-question"></i>
-                </div>
-            </div>
-            <!-- Informações de resultado e contagem regressiva para a IA -->
-            <div class="ai-game-feedback">
-                <p id="ai-countdown-message" class="countdown-ai"></p>
-                <p id="ai-result-message" class="result-ai"></p>
-            </div>
-        </section>
-    </div>
-
-    <!-- Linha Inferior: Mensagens do Jogo e Debug Information -->
-    <div class="bottom-messages-debug-row">
-        <!-- Mensagens Principais do Jogo -->
-        <section class="main-messages-section card">
-            <h2><i class="fas fa-bullhorn"></i> Mensagens do Jogo</h2>
-            <div class="result-message-area">
-                <p id="round-result-main">Aguardando...</p>
-                <div class="countdown-display">
-                    <p id="countdown-message"></p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Informações de Debug do Backend -->
-        <section class="debug-info-section card">
-            <h2><i class="fas fa-bug"></i> Debug do Backend</h2>
-            <div class="debug-content">
-                <p>Mão Detectada: <span id="hand-detected-status">Não</span></p>
-                <p>Gesto Detectado (Backend): <span id="detected-gesture-feedback">Nenhum</span></p>
-                <h3>Estado Completo do Jokenpo (JSON):</h3>
-                <pre id="jokenpo-json-display">{}</pre>
-            </div>
-        </section>
-    </div>
-
-</div>
-{% endblock %}
-
-{% block scripts %}
-{% endblock %}
+<!DOCTYPE html> 
+<html lang="pt-BR"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Jokenpo com IA</title> 
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
+</head> 
+<body> 
+    <header> 
+        <h1><i class="fas fa-hand-rock"></i> Jokenpo com IA</h1> 
+    </header> 
+    <main> 
+        <div class="container"> 
+            <section class="camera-section card"> 
+                <h2><i class="fas fa-video"></i> Câmera</h2> 
+                <div class="video-container"> 
+                    <img id="camera-feed" src="/video_jokenpo/0" alt="Camera Feed"> 
+                    <p id="camera-status" class="status-message">Conectando à câmera...</p> 
+                </div> 
+                <div class="controls"> 
+                    <button id="start-processing" class="button primary"><i class="fas fa-play"></i> Iniciar Processamento</button> 
+                    <button id="stop-processing" class="button danger"><i class="fas fa-stop"></i> Parar Processamento</button> 
+                </div> 
+                <div class="game-feedback-area"> 
+                    <div class="scoreboard-mini"> 
+                        <p>Placar: Você <span id="player-score-mini">0</span> | IA <span id="ai-score-mini">0</span> | Empates <span id="ties-mini">0</span></p> 
+                    </div> 
+                    <div class="result-message-area"> 
+                        <p id="round-result-main">Aguardando...</p> 
+                        <div class="countdown-display"> 
+                            <p id="countdown-message"></p> 
+                        </div> 
+                    </div> 
+                </div> 
+            </section> 
+            <section class="jokenpo-game-section card"> 
+                <h2><i class="fas fa-hand-rock"></i> Jokenpo</h2> 
+                <div class="scoreboard"> 
+                    <div class="score"> 
+                        <span class="player-score" id="player-score">0</span> 
+                        <p>Você</p> 
+                    </div> 
+                    <div class="separator">-</div> 
+                    <div class="score"> 
+                        <span class="ai-score" id="ai-score">0</span> 
+                        <p>IA</p> 
+                    </div> 
+                </div> 
+                <div class="round-info"> 
+                    <p>Empates: <span id="ties">0</span> | Rodadas: <span id="rounds-played">0</span></p> 
+                </div> 
+                <div class="current-gestures"> 
+                    <div class="player-info"> 
+                        <p>Você: <span id="player-current-gesture">Nenhum</span></p> 
+                        <div class="gesture-icon" id="player-choice-icon"> 
+                            <i class="fas fa-question"></i> 
+                        </div> 
+                    </div> 
+                    <div class="ai-info"> 
+                        <p>IA: <span id="ai-current-choice">Nenhum</span></p> 
+                        <div class="gesture-icon" id="ai-choice-icon"> 
+                            <i class="fas fa-question"></i> 
+                        </div> 
+                    </div> 
+                </div> 
+                <div class="jokenpo-controls"> 
+                    <button id="play-round-button" class="button success"><i class="fas fa-fist-raised"></i> Jogar Rodada</button> 
+                    <button id="reset-scoreboard" class="button info"><i class="fas fa-sync-alt"></i> Reiniciar Placar</button> 
+                </div> 
+                <div class="debug-info"> 
+                    <p>Mão Detectada: <span id="hand-detected-status">Não</span></p> 
+                    <p>Gesto Detectado (Backend): <span id="detected-gesture-feedback">Nenhum</span></p> 
+                    <pre id="jokenpo-json-display"></pre> 
+                </div> 
+            </section> 
+        </div> 
+    </main>
+    <footer>
+        <p>&copy; 2025 Jokenpo IA. Todos os direitos reservados.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
