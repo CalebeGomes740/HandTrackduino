@@ -1,176 +1,420 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f0f0f0;
-}
+/* Import the Inter font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
+.jokenpo-header {
+    /* Tons de azul mais escuro para o cabeçalho */
+    background-color: var(--secondary); /* Verde-azulado escuro */
+    color: #ffffff; /* Branco */
+    padding: 1.5rem 0;
     text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+h1 {
+    margin: 0;
+    font-weight: 700;
+    font-size: 2.5rem;
+}
+
+.jokenpo-main {
+    flex: 1;
     padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align to the top */
+    flex-grow: 1;
 }
 
-.container {
+.jokenpo-container {
     display: flex;
     flex-wrap: wrap;
+    gap: 30px; /* Spacing between cards */
     justify-content: center;
-    gap: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
+    width: 100%;
+    max-width: 1200px; /* Max content width */
 }
 
-.card {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: calc(50% - 20px);
-}
-
-.camera-section {
+.jokenpo-card {
+    background-color: #ffffff; /* Mantido branco para destaque */
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* More pronounced shadow */
+    padding: 25px;
+    flex: 1;
+    min-width: 320px; /* Minimum width for mobile */
+    max-width: 550px; /* Max width for each card */
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
+    transition: transform 0.3s ease-in-out; /* Hover animation */
 }
 
-.video-container {
-    position: relative;
+.jokenpo-card:hover {
+    transform: translateY(-5px); /* Lift effect */
+}
+
+h2 {
+    /* Tons de azul para os títulos de seção */
+    color: #26c6da; /* Ciano mais brilhante */
+    margin-top: 0;
+    font-weight: 600;
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.jokenpo-video-container {
     width: 100%;
-    height: 400px;
-    padding-bottom: 0;
+    max-width: 640px;
+    height: auto;
+    border: 2px solid #a7d9eb; /* Borda em azul claro */
+    background-color: #000;
+    border-radius: 8px;
+    overflow: hidden; /* Ensures video fits border-radius */
+    margin-bottom: 20px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    aspect-ratio: 16 / 9; /* Maintains 16:9 aspect ratio */
 }
 
 #camera-feed {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover; /* Ensures video fills container */
+    display: block; /* Removes extra space below video */
+    transform: scaleX(-1); /* Flips video to simulate a mirror */
 }
 
-.status-message {
+.jokenpo-status-message {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    padding: 10px;
-    border-radius: 10px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 0.9rem;
 }
 
-.game-feedback-area {
+.jokenpo-controls {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.jokenpo-button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.jokenpo-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.jokenpo-button.jokenpo-primary {
+    /* Azul mais vibrante para botões primários */
+    background-color: #26c6da;
+    color: white;
+}
+
+.jokenpo-button.jokenpo-primary:hover {
+    background-color: #00bcd4; /* Um pouco mais escuro no hover */
+}
+
+.jokenpo-button.jokenpo-danger {
+    background-color: #ef5350; /* Vermelho mais suave */
+    color: white;
+}
+
+.jokenpo-button.jokenpo-danger:hover {
+    background-color: #e53935;
+}
+
+.jokenpo-button.jokenpo-success {
+    background-color: #66bb6a; /* Verde mais suave */
+    color: white;
+}
+
+.jokenpo-button.jokenpo-success:hover {
+    background-color: #43a047;
+}
+
+.jokenpo-button.jokenpo-info {
+    background-color: #90a4ae; /* Azul-acinzentado para botões de informação/reset */
+    color: white;
+}
+.jokenpo-button.jokenpo-info:hover {
+    background-color: #78909c;
+}
+
+/* Styles for the Jokenpo section */
+.jokenpo-jokenpo-game-section {
+    /* No specific SVG styles needed here, as the scoreboard is pure HTML */
+}
+
+.jokenpo-scoreboard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin: 20px 0;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2c3e50;
+    /* Fundo do placar em tom de azul claro */
+    background-color: #e3f2fd; /* Azul muito claro */
+    padding: 15px 30px;
+    border-radius: 10px;
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.jokenpo-score {
+    text-align: center;
+}
+
+.jokenpo-score span {
+    color: #26c6da; /* Ciano para a pontuação */
+    font-size: 3rem;
+}
+
+.jokenpo-separator {
+    font-size: 3rem;
+    color: #b0bec5; /* Cinza azulado */
+}
+
+.jokenpo-round-info {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.jokenpo-round-info span {
+    color: #26c6da; /* Ciano para info da rodada */
+    font-weight: 700;
+}
+
+/* Nova área de feedback do jogo (placar mini e resultado principal) */
+.jokenpo-game-feedback-area {
+    width: 100%;
     margin-top: 20px;
-}
-
-.scoreboard-mini {
-    background-color: #f0f0f0;
-    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 10px; /* Padding for the entire feedback area */
+    background-color: #e0f7fa; /* Azul mais claro ainda */
     border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08); /* Subtle shadow */
 }
 
-.result-message-area {
-    margin-top: 10px;
+.jokenpo-scoreboard-mini {
+    background-color: #b3e5fc; /* Azul claro para o mini placar */
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #334e68;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
-#round-result-main {
-    font-size: 24px;
-    font-weight: bold;
+.jokenpo-scoreboard-mini p {
+    margin: 0;
 }
 
-.countdown-display {
-    margin-top: 10px;
+.jokenpo-scoreboard-mini span {
+    color: #03a9f4; /* Azul mais intenso para pontuação mini */
+    font-weight: 700;
+}
+
+.jokenpo-result-message-area {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#round-result-main { /* Mensagem de resultado principal */
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #2c3e50; /* Default color for result */
+    margin: 0 0 10px 0; /* Spacing below the message */
+}
+
+/* Colors for the result (main) - UPDATED TO JOKENPO- PREFIX */
+#round-result-main.jokenpo-won { color: #4caf50; } /* Verde vibrante */
+#round-result-main.jokenpo-lost { color: #f44336; } /* Vermelho vibrante */
+#round-result-main.jokenpo-draw { color: #ffeb3b; } /* Amarelo vibrante */
+
+
+.jokenpo-countdown-display {
+    margin-top: 5px; /* Adjust to not conflict with result message */
 }
 
 #countdown-message {
-    font-size: 24px;
-    font-weight: bold;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #ff9800; /* Laranja (mantido vibrante para contraste) */
+    transition: color 0.3s ease;
 }
 
-.jokenpo-game-section {
+.jokenpo-current-gestures {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    margin-bottom: 20px;
+    flex-wrap: wrap; /* Allows wrapping on small screens */
+    gap: 15px;
 }
 
-.scoreboard {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-}
-
-.score {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.separator {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.current-gestures {
-    margin-top: 20px;
-}
-
-.player-info, .ai-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.gesture-icon {
-    font-size: 48px;
-}
-
-.debug-info {
-    margin-top: 20px;
-}
-
-.button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-.primary {
-    background-color: #4CAF50;
-    color: #fff;
-}
-
-.danger {
-    background-color: #F44336;
-    color: #fff;
-}
-
-.success {
-    background-color: #8BC34A;
-    color: #fff;
-}
-
-.info {
-    background-color: #2196F3;
-    color: #fff;
-}
-
-footer {
-    background-color: #333;
-    color: #fff;
+.jokenpo-player-info, .jokenpo-ai-info {
+    flex: 1;
+    min-width: 120px; /* Minimum width for each gesture box */
+    background-color: #f0f8ff; /* Fundo mais claro para info de jogada */
+    border: 1px solid #e1f5fe; /* Borda azul claro */
+    border-radius: 8px;
     padding: 10px;
-    text-align: center;
-    clear: both;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.jokenpo-current-gestures p {
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.jokenpo-gesture-icon {
+    font-size: 3rem;
+    color: #7f8c8d; /* Default color for gesture icons (mantido) */
+    margin-top: 10px;
+    transition: transform 0.2s ease-out; /* Animation for icons */
+}
+
+.jokenpo-jokenpo-controls {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.jokenpo-debug-info {
+    margin-top: 25px;
+    width: 100%;
+    font-size: 0.9rem;
+    text-align: left;
+    background-color: #e0f2f7; /* Tom de azul claro para debug */
+    border: 1px solid #b3e0ed; /* Borda mais escura */
+    border-radius: 8px;
+    padding: 10px 15px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+}
+
+.jokenpo-debug-info p {
+    margin: 0 0 5px 0;
+    font-weight: 600;
+}
+
+.jokenpo-debug-info span {
+    font-weight: 400;
+    color: #3f51b5; /* Azul mais escuro para valores debug */
+}
+
+#jokenpo-json-display {
+    background-color: #e0f2f7; /* Mesmo fundo que debug-info */
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    margin-top: 5px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.8rem;
+    white-space: pre-wrap;
+    word-break: break-all;
+    max-height: 120px; /* Limited height for JSON */
+    overflow-y: auto;
+    width: 100%;
+    text-align: left;
+}
+
+.jokenpo-footer {
+    /* Tons de azul mais escuro para o rodapé */
+    background-color: var(--secondary);
+    color: #ffffff;
+    margin-top: auto; /* Pushes the footer to the bottom of the page */
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    .jokenpo-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .jokenpo-card {
+        margin-bottom: 20px;
+        min-width: 90%;
+    }
+
+    .jokenpo-controls, .jokenpo-jokenpo-controls {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .jokenpo-button {
+        width: 100%;
+    }
+
+    .jokenpo-current-gestures {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .jokenpo-card {
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .jokenpo-scoreboard {
+        font-size: 1.5rem;
+        gap: 10px;
+        padding: 10px 20px;
+    }
+    .jokenpo-score span {
+        font-size: 2.5rem;
+    }
+    .jokenpo-separator {
+        font-size: 2.5rem;
+    }
+    #round-result-main {
+        font-size: 1.4rem; /* Smaller on small screens */
+    }
+    #countdown-message {
+        font-size: 1.8rem;
+    }
 }
